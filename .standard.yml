@@ -1,0 +1,10 @@
+ruby_version: 3.2.4
+format: progress
+parallel: true
+
+ignore:
+  - 'db/schema.rb'
+  - 'vendor/**/*'
+  - 'spec/**/*':
+    - Layout/AlignHash
+    - Style/GlobalVars

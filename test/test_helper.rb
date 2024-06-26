@@ -1,2 +1,2 @@
-require_relative '../lib/secretariat.rb'
-require 'minitest/autorun'
+require_relative "../lib/secretariat"
+require "minitest/autorun"

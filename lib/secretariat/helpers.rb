@@ -1,6 +1,6 @@
 module Secretariat
   module Helpers
-    def self.format(something, round: nil, digits:2)
+    def self.format(something, round: nil, digits: 2)
       dec = BigDecimal(something, 10)
       dec = dec.round(round, :down) if round
       "%0.#{digits}f" % dec
