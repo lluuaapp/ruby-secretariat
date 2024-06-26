@@ -61,7 +61,7 @@ RSpec.describe Secretariat::Invoice do
   }
 
   describe "valid xml schema version 2" do
-    let(:xml) { subject.to_xml(version: 2)}
+    let(:xml) { subject.to_xml(version: 2) }
 
     let(:validator) { Secretariat::Validator.new(xml, version: 2) }
 
@@ -71,7 +71,7 @@ RSpec.describe Secretariat::Invoice do
   end
 
   describe "valid xml schema version 1" do
-    let(:xml) { subject.to_xml(version: 1)}
+    let(:xml) { subject.to_xml(version: 1) }
 
     let(:validator) { Secretariat::Validator.new(xml, version: 1) }
 
@@ -81,7 +81,7 @@ RSpec.describe Secretariat::Invoice do
   end
 
   describe "valid xml schematron version 2" do
-    let(:xml) { subject.to_xml(version: 2)}
+    let(:xml) { subject.to_xml(version: 2) }
 
     let(:validator) { Secretariat::Validator.new(xml, version: 2) }
 
@@ -91,7 +91,7 @@ RSpec.describe Secretariat::Invoice do
   end
 
   describe "valid xml schematron version 1" do
-    let(:xml) { subject.to_xml(version: 1)}
+    let(:xml) { subject.to_xml(version: 1) }
 
     let(:validator) { Secretariat::Validator.new(xml, version: 1) }
 

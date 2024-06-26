@@ -1,7 +1,6 @@
 require "spec_helper"
 
 RSpec.describe Secretariat::Validator do
-
   context "zugpferd2 schema extended" do
     let(:xml) { File.open(Secretariat.file_path("spec/fixtures/zugferd_2/extended.xml")) }
     subject { described_class.new(xml, version: 2) }
@@ -10,7 +9,6 @@ RSpec.describe Secretariat::Validator do
       expect(subject.validate_against_schema).to be_empty
     }
   end
-Secretariat
   context "zugpferd2 schematron extended" do
     let(:xml) { File.open(Secretariat.file_path("spec/fixtures/zugferd_2/extended.xml")) }
     subject { described_class.new(xml, version: 2) }
