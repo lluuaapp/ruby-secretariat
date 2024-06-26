@@ -37,6 +37,10 @@ module Secretariat
     :payment_description,
     :payment_status,
     :payment_due_date,
+    :header_text,
+    :footer_text,
+    :project_id,
+    :project_name,
     keyword_init: true) do
     include Versioner
 
@@ -154,6 +158,19 @@ module Secretariat
                 xml.text(issue_date.strftime("%Y%m%d"))
               end
             end
+
+            if header_text.to_s != ""
+              xml["ram"].IncludedNote {
+                xml["ram"].Content header_text
+                xml["ram"].SubjectCode "SUR" # Comments by the seller
+              }
+            end
+            if footer_text.to_s != ""
+              xml["ram"].IncludedNote {
+                xml["ram"].Content footer_text
+                xml["ram"].SubjectCode "SUR" # Comments by the seller
+              }
+            end
           end
           transaction = by_version(version, "SpecifiedSupplyChainTradeTransaction", "SupplyChainTradeTransaction")
           xml["rsm"].send(transaction) do
@@ -176,6 +193,17 @@ module Secretariat
               end
               xml["ram"].BuyerTradeParty do
                 buyer.to_xml(xml, version: version)
+              end
+
+              if project_id.to_s != "" || project_name.to_s != ""
+                xml["ram"].SpecifiedProcuringProject do
+                  if project_id.to_s != ""
+                    xml["ram"].ID project_id.to_s
+                  end
+                  if project_name.to_s != ""
+                    xml["ram"].Name project_name.to_s
+                  end
+                end
               end
             end
 
