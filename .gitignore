@@ -1,2 +1,18 @@
-Gemfile.lock
-*.gem
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+.DS_STORE
+
+# rspec failure tracking
+.rspec_status
+
+/*.p10
+/*.pem
+/*.crt
+.env
+.env/*
