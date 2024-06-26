@@ -225,7 +225,7 @@ module Secretariat
                       xml.text(payment_due_date&.strftime("%Y%m%d"))
                     end
                   end
-                else
+                elsif payment_status.to_s != ""
                   xml["ram"].Description payment_status.capitalize
                 end
               end
