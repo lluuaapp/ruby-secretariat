@@ -1,5 +1,10 @@
 # A ZUGFeRD xml generator and validator
 
+![Testing](https://github.com/Skulli/ruby-secretariat/actions/workflows/ci.yml/badge.svg?branch=main)
+<a href="https://github.com/testdouble/standard" target="_blank">
+  <img alt="Ruby Code Style" src="https://img.shields.io/badge/Ruby_Code_Style-standard-brightgreen.svg" />
+</a>
+
 More info coming soon. See tests for examples.
 
 # Some words of caution
