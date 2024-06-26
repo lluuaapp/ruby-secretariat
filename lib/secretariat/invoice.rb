@@ -25,6 +25,8 @@ module Secretariat
     :payment_type,
     :payment_text,
     :payment_iban,
+    :payment_bic,
+    :payment_account_name,
     :tax_category,
     :tax_percent,
     :tax_amount,
@@ -232,6 +234,14 @@ module Secretariat
                 if payment_iban && payment_iban != ""
                   xml["ram"].PayeePartyCreditorFinancialAccount do
                     xml["ram"].IBANID payment_iban
+                    if payment_account_name.to_s != ""
+                      xml["ram"].payment_account_name
+                    end
+                  end
+                  if payment_bic.to_s != ""
+                    xml["ram"].PayeeSpecifiedCreditorFinancialInstitution do
+                      xml["ram"].BICID payment_bic
+                    end
                   end
                 end
               end
