@@ -42,7 +42,7 @@ module Secretariat
         xml["ram"].CityName city
         xml["ram"].CountryID country_id
       end
-      if version == 3 && contact_email.present?
+      if version == 3 && contact_email.to_s != ""
         xml["ram"].URIUniversalCommunication do
           xml["ram"].URIID(schemeID: "EM") do
             xml.text(contact_email)
