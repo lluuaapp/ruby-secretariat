@@ -21,3 +21,13 @@ require_relative "secretariat/invoice"
 require_relative "secretariat/trade_party"
 require_relative "secretariat/line_item"
 require_relative "secretariat/validator"
+
+module Secretariat
+  def self.root
+    File.expand_path "..", __dir__
+  end
+
+  def self.file_path(path)
+    File.join(root, path)
+  end
+end
