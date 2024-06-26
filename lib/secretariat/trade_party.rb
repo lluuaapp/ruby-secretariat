@@ -14,7 +14,7 @@
 
 module Secretariat
   TradeParty = Struct.new("TradeParty",
-    :name, :street1, :street2, :city, :postal_code, :country_id, :vat_id, :contact_name, :contact_phone, :contact_email,
+    :name, :street1, :street2, :city, :postal_code, :country_id, :vat_id, :contact_name, :contact_phone, :contact_fax, :contact_email,
     :tax_id, :registration_number,
     keyword_init: true) do
     def to_xml(xml, exclude_tax: false, version: 2)
@@ -30,6 +30,11 @@ module Secretariat
           if contact_phone.to_s != ""
             xml["ram"].TelephoneUniversalCommunication do
               xml["ram"].CompleteNumber contact_phone
+            end
+          end
+          if contact_fax.to_s != ""
+            xml["ram"].FaxUniversalCommunication do
+              xml["ram"].CompleteNumber contact_fax
             end
           end
           if contact_email.to_s != ""
