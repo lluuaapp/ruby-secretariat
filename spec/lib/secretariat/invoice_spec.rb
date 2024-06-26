@@ -100,4 +100,26 @@ RSpec.describe Secretariat::Invoice do
       expect(validator.validate_against_schematron).to be_empty
     }
   end
+
+  context "xrechnung" do
+    describe "valid xml schema version 2" do
+      let(:xml) { subject.to_xml(version: 2, mode: :xrechnung) }
+
+      let(:validator) { Secretariat::Validator.new(xml, version: 2) }
+
+      it {
+        expect(validator.validate_against_schema).to be_empty
+      }
+    end
+
+    describe "valid xml schema version 3" do
+      let(:xml) { subject.to_xml(version: 3, mode: :xrechnung) }
+
+      let(:validator) { Secretariat::Validator.new(xml, version: 2) }
+
+      it {
+        expect(validator.validate_against_schema).to be_empty
+      }
+    end
+  end
 end
