@@ -17,6 +17,7 @@ require "bigdecimal"
 module Secretariat
   LineItem = Struct.new("LineItem",
     :name,
+    :description,
     :quantity,
     :unit,
     :gross_amount,
@@ -29,6 +30,7 @@ module Secretariat
     :charge_amount,
     :origin_country_code,
     :currency_code,
+    :buyer_id,
     keyword_init: true) do
     include Versioner
 
@@ -90,7 +92,13 @@ module Secretariat
         end
         if version >= 2
           xml["ram"].SpecifiedTradeProduct do
+            if buyer_id.to_s != ""
+              xml["ram"].BuyerAssignedID buyer_id
+            end
             xml["ram"].Name name
+            if description.to_s != ""
+              xml["ram"].Description description
+            end
             xml["ram"].OriginTradeCountry do
               xml["ram"].ID origin_country_code
             end
