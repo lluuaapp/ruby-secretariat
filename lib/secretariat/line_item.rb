@@ -33,6 +33,8 @@ module Secretariat
     :buyer_id,
     :invoice_start,
     :invoice_end,
+    :invoice_text,
+    :item_id,
     keyword_init: true) do
     include Versioner
 
@@ -91,6 +93,11 @@ module Secretariat
       xml["ram"].IncludedSupplyChainTradeLineItem do
         xml["ram"].AssociatedDocumentLineDocument do
           xml["ram"].LineID line_item_index
+        end
+        if invoice_text.to_s != ""
+          xml["ram"].IncludedNote {
+            xml["ram"].Content invoice_text
+          }
         end
         if version >= 2
           xml["ram"].SpecifiedTradeProduct do
@@ -178,6 +185,13 @@ module Secretariat
           monetary_summation = by_version(version, "SpecifiedTradeSettlementMonetarySummation", "SpecifiedTradeSettlementLineMonetarySummation")
           xml["ram"].send(monetary_summation) do
             Helpers.currency_element(xml, "ram", "LineTotalAmount", charge_amount, currency_code, add_currency: version == 1)
+          end
+
+          if item_id.to_s != ""
+            xml["ram"].AdditionalReferencedDocument do
+              xml["ram"].IssuerAssignedID item_id
+              xml["ram"].TypeCode "130"
+            end
           end
         end
 
