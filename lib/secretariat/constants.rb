@@ -86,24 +86,24 @@ module Secretariat
 
   INVOICE_TYPES = {
     INVOICE: {
-      code: '380',
-      name: 'Rechnung'
+      code: "380",
+      name: "Rechnung"
     },
     CREDIT_NOTE: {
-      code: '381',
-      name: 'Gutschrift'
+      code: "381",
+      name: "Gutschrift"
     },
     CORRECTION: {
-      code: '384',
-      name: 'Korrekturrechnung'
+      code: "384",
+      name: "Korrekturrechnung"
     },
     PART_INVOICE: {
-      code: '326',
-      name: 'Teilrechnung'
+      code: "326",
+      name: "Teilrechnung"
     },
     REVERSED_INVOICE: {
-      code: '457',
-      name: 'Stornorechnung'
+      code: "457",
+      name: "Stornorechnung"
     }
   }
 end
