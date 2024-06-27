@@ -56,7 +56,8 @@ RSpec.describe Secretariat::Invoice do
       grand_total_amount: 29,
       due_amount: 0,
       paid_amount: 29,
-      buyer_reference: "REF-112233"
+      buyer_reference: "REF-112233",
+      invoice_type: :INVOICE
     )
   }
 

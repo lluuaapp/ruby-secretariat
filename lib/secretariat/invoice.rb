@@ -46,6 +46,7 @@ module Secretariat
     :project_name,
     :invoice_start,
     :invoice_end,
+    :invoice_type,
     keyword_init: true) do
     include Versioner
 
@@ -155,10 +156,17 @@ module Secretariat
 
           xml["rsm"].send(header) do
             xml["ram"].ID id
-            if version == 1
-              xml["ram"].Name "RECHNUNG"
+            if !invoice_type.nil?
+              if version == 1
+                xml["ram"].Name INVOICE_TYPES[invoice_type][:name]
+              end
+              xml["ram"].TypeCode INVOICE_TYPES[invoice_type][:code]
+            else
+              if version == 1
+                xml["ram"].Name "RECHNUNG"
+              end
+              xml["ram"].TypeCode "380"
             end
-            xml["ram"].TypeCode "380" # TODO: make configurable
             xml["ram"].IssueDateTime do
               xml["udt"].DateTimeString(format: "102") do
                 xml.text(issue_date.strftime("%Y%m%d"))
