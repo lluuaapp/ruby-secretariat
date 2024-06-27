@@ -20,6 +20,7 @@ module Secretariat
     :issue_date,
     :seller,
     :buyer,
+    :recipient,
     :line_items,
     :currency_code,
     :payment_type,
@@ -214,7 +215,11 @@ module Secretariat
             xml["ram"].send(delivery) do
               if version >= 2
                 xml["ram"].ShipToTradeParty do
-                  buyer.to_xml(xml, exclude_tax: true, version: version)
+                  if !recipient.nil?
+                    recipient.to_xml(xml, exclude_tax: true, version: version)
+                  else
+                    buyer.to_xml(xml, exclude_tax: true, version: version)
+                  end
                 end
               end
               xml["ram"].ActualDeliverySupplyChainEvent do
