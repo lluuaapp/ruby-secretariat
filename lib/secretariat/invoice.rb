@@ -125,6 +125,7 @@ module Secretariat
       end
 
       if !skip_validation && !valid?
+        puts errors.inspect
         raise ValidationError.new("Invoice is invalid", errors)
       end
 
