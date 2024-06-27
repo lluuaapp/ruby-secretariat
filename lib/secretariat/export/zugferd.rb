@@ -85,40 +85,8 @@ module Secretariat
           logger.error("Error during file combination: #{e.message}")
           raise e
         ensure
-          # File.delete(output_file_path) if output_dir == Dir.tmpdir && File.exist?(output_file_path)
+          File.delete(output_file_path) if output_dir == Dir.tmpdir && File.exist?(output_file_path)
         end
-      end
-
-      def self.logger
-        log_directory = File.expand_path("../../../../log", __FILE__)
-        FileUtils.mkdir_p(log_directory) unless Dir.exist?(log_directory)
-
-        @@logger ||= Logger.new(File.join(log_directory, "export.log"))
-      end
-
-      def self.convert_a1_to_a3_params(pdf_a1, output_file_path)
-        "--action a3only --source #{pdf_a1} --out #{output_file_path}"
-      end
-
-      def self.combine_pdf_and_xml_params(source_pdf, source_xml, output_file_path, attachments_pathlist: nil)
-        "--action combine --source #{source_pdf} --source-xml #{source_xml} --out #{output_file_path} --format zf --version 2 --profile E --attachments \"\""
-      end
-
-      def self.call_jar(params)
-        command = "java -Xmx1G -Dfile.encoding=UTF-8 -jar #{JAR_PATH} #{params}"
-
-        logger.info("Executing command: #{command}")
-
-        stdout, stderr, status = Open3.capture3(command)
-
-        if status.success?
-          logger.info("Command executed successfully")
-        else
-          logger.error("Command failed with error: #{stderr}")
-          logger.error("Standard output: #{stdout}")
-        end
-
-        status.success?
       end
     end
   end

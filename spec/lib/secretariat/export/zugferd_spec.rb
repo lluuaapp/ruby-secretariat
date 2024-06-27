@@ -60,4 +60,3 @@ RSpec.describe Secretariat::Export::Zugferd, type: :module do
     end
   end
 end
-
