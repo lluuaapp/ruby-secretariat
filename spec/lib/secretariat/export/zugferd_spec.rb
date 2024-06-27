@@ -45,18 +45,4 @@ RSpec.describe Secretariat::Export::Zugferd, type: :module do
       expect(File.exist?(result)).to be(true)
     end
   end
-
-  describe "convert_combine_files" do
-    it "converts a1 to a3, then combines a3 and XML files" do
-      result = Secretariat::Export::Zugferd.convert_and_combine(
-        source_pdf: source_pdf,
-        source_xml: source_xml,
-        output_filename: output_filename3,
-        output_dir: output_dir
-      )
-
-      expect(result).to eq(output_file_path3)
-      expect(File.exist?(result)).to be(true)
-    end
-  end
 end

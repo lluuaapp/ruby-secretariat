@@ -39,12 +39,6 @@ module Secretariat
         status.success?
       end
 
-      def self.convert_and_combine(source_pdf:, source_xml:, output_filename: "output.pdf", output_dir: Dir.mktmpdir)
-        pdfa3 = convert_to_a3(source_pdf: source_pdf)
-
-        combine_files(source_pdf: pdfa3, source_xml: source_xml, output_filename: output_filename, output_dir: output_dir)
-      end
-
       def self.convert_to_a3(source_pdf:, output_filename: "a3output.pdf", output_dir: Dir.mktmpdir)
         output_file_path = File.join(output_dir, output_filename)
 
