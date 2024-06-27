@@ -15,9 +15,12 @@
 module Secretariat
   TradeParty = Struct.new("TradeParty",
     :name, :street1, :street2, :city, :postal_code, :country_id, :vat_id, :contact_name, :contact_phone, :contact_fax, :contact_email,
-    :tax_id, :registration_number,
+    :tax_id, :registration_number, :trade_party_id,
     keyword_init: true) do
     def to_xml(xml, exclude_tax: false, version: 2)
+      if trade_party_id.to_s != ""
+        xml["ram"].Name trade_party_id
+      end
       xml["ram"].Name name
       if registration_number.to_s != ""
         xml["ram"].SpecifiedLegalOrganization do
