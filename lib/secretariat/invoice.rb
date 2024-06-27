@@ -44,6 +44,8 @@ module Secretariat
     :footer_text,
     :project_id,
     :project_name,
+    :invoice_start,
+    :invoice_end,
     keyword_init: true) do
     include Versioner
 
@@ -261,6 +263,20 @@ module Secretariat
 
                 percent = by_version(version, "ApplicablePercent", "RateApplicablePercent")
                 xml["ram"].send(percent, Helpers.format(tax_percent))
+              end
+              if invoice_start.to_s != "" && invoice_end.to_s != ""
+                xml["ram"].BillingSpecifiedPeriod do
+                  xml["ram"].StartDateTime do
+                    xml["udt"].DateTimeString(format: "102") do
+                      xml.text(invoice_start.strftime("%Y%m%d"))
+                    end
+                  end
+                  xml["ram"].OccurrenceDateTime do
+                    xml["udt"].EndDateTime(format: "102") do
+                      xml.text(invoice_end.strftime("%Y%m%d"))
+                    end
+                  end
+                end
               end
               xml["ram"].SpecifiedTradePaymentTerms do
                 if payment_status == "unpaid"
