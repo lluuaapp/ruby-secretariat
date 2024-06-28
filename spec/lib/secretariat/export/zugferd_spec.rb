@@ -7,12 +7,9 @@ RSpec.describe Secretariat::Export::Zugferd, type: :module do
   let(:source_pdf) { Secretariat.file_path("spec/fixtures/zugferd_2/test_a1.pdf") }
   let(:source_xml) { Secretariat.file_path("spec/fixtures/zugferd_2/test-x.xml") }
   let(:output_dir) { Dir.mktmpdir }
-  let(:output_filename) { "output.pdf" }
   let(:output_filename2) { "output2.pdf" }
-  let(:output_filename3) { "output3.pdf" }
-  let(:output_file_path) { File.join(output_dir, output_filename) }
+  let(:output_file_path) { File.join(output_dir, "test_a1_a3.pdf") }
   let(:output_file_path2) { File.join(output_dir, output_filename2) }
-  let(:output_file_path3) { File.join(output_dir, output_filename3) }
   let(:attachments_pathlist) { "" }
 
   after(:each) do
@@ -23,7 +20,6 @@ RSpec.describe Secretariat::Export::Zugferd, type: :module do
     it "converts a1 to a3" do
       result = Secretariat::Export::Zugferd.convert_to_a3(
         source_pdf: source_pdf,
-        output_filename: output_filename,
         output_dir: output_dir
       )
 

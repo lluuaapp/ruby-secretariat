@@ -39,7 +39,7 @@ module Secretariat
         status.success?
       end
 
-      def self.convert_to_a3(source_pdf:, output_filename: "a3output.pdf", output_dir: Dir.mktmpdir)
+      def self.convert_to_a3(source_pdf:, output_filename: output_filename_with_suffix(source_pdf, "_a3"), output_dir: Dir.mktmpdir)
         output_file_path = File.join(output_dir, output_filename)
 
         begin
@@ -61,7 +61,7 @@ module Secretariat
         end
       end
 
-      def self.combine_files(source_pdf:, source_xml:, output_filename: "output.pdf", output_dir: Dir.mktmpdir)
+      def self.combine_files(source_pdf:, source_xml:, output_filename: output_filename_with_suffix(source_pdf, "_zugferd"), output_dir: Dir.mktmpdir)
         output_file_path = File.join(output_dir, output_filename)
 
         begin
@@ -81,6 +81,11 @@ module Secretariat
         ensure
           File.delete(output_file_path) if output_dir == Dir.tmpdir && File.exist?(output_file_path)
         end
+      end
+
+      def self.output_filename_with_suffix(source_file, suffix)
+        ext = File.extname(source_file)
+        File.basename(source_file, ext) + suffix + ext
       end
     end
   end
