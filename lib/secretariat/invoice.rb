@@ -305,12 +305,22 @@ module Secretariat
               xml["ram"].send(monetary_summation) do
                 Helpers.currency_element(xml, "ram", "LineTotalAmount", basis_amount, currency_code, add_currency: version == 1)
                 # TODO: Fix this!
-                Helpers.currency_element(xml, "ram", "ChargeTotalAmount", BigDecimal("0"), currency_code, add_currency: version == 1)
-                Helpers.currency_element(xml, "ram", "AllowanceTotalAmount", BigDecimal("0"), currency_code, add_currency: version == 1)
+                # Zuschuesse
+                unless BigDecimal("0").to_f.zero?
+                  Helpers.currency_element(xml, "ram", "ChargeTotalAmount", BigDecimal("0"), currency_code, add_currency: version == 1)
+                end
+                # Rabatte
+                unless BigDecimal("0").to_f.zero?
+                  Helpers.currency_element(xml, "ram", "AllowanceTotalAmount", BigDecimal("0"), currency_code, add_currency: version == 1)
+                end
                 Helpers.currency_element(xml, "ram", "TaxBasisTotalAmount", basis_amount, currency_code, add_currency: version == 1)
-                Helpers.currency_element(xml, "ram", "TaxTotalAmount", tax_amount, currency_code, add_currency: true)
+                unless tax_amount.to_f.zero?
+                  Helpers.currency_element(xml, "ram", "TaxTotalAmount", tax_amount, currency_code, add_currency: true)
+                end
                 Helpers.currency_element(xml, "ram", "GrandTotalAmount", grand_total_amount, currency_code, add_currency: version == 1)
-                Helpers.currency_element(xml, "ram", "TotalPrepaidAmount", paid_amount, currency_code, add_currency: version == 1)
+                unless paid_amount.to_f.zero?
+                  Helpers.currency_element(xml, "ram", "TotalPrepaidAmount", paid_amount, currency_code, add_currency: version == 1)
+                end
                 Helpers.currency_element(xml, "ram", "DuePayableAmount", due_amount, currency_code, add_currency: version == 1)
               end
             end
