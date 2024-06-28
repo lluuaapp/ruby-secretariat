@@ -280,8 +280,8 @@ module Secretariat
                       xml.text(invoice_start.strftime("%Y%m%d"))
                     end
                   end
-                  xml["ram"].OccurrenceDateTime do
-                    xml["udt"].EndDateTime(format: "102") do
+                  xml["ram"].EndDateTime do
+                    xml["udt"].DateTimeString(format: "102") do
                       xml.text(invoice_end.strftime("%Y%m%d"))
                     end
                   end
