@@ -1,9 +1,7 @@
 require "spec_helper"
-require "./lib/secretariat"
 require "./lib/secretariat/export"
-require "./lib/secretariat/export/zugferd"
 
-RSpec.describe Secretariat::Export::Zugferd, type: :module do
+RSpec.describe Secretariat::Export::ZugferdPdf, type: :module do
   let(:source_pdf) { Secretariat.file_path("spec/fixtures/zugferd_2/test_a1.pdf") }
   let(:source_xml) { Secretariat.file_path("spec/fixtures/zugferd_2/test-x.xml") }
   let(:output_dir) { Dir.mktmpdir }
@@ -18,7 +16,7 @@ RSpec.describe Secretariat::Export::Zugferd, type: :module do
 
   describe "convert_file" do
     it "converts a1 to a3" do
-      result = Secretariat::Export::Zugferd.convert_to_a3(
+      result = described_class.convert_to_a3(
         source_pdf: source_pdf,
         output_dir: output_dir
       )
@@ -34,7 +32,7 @@ RSpec.describe Secretariat::Export::Zugferd, type: :module do
 
   describe "combine_files" do
     it "combines PDF and XML files" do
-      result = Secretariat::Export::Zugferd.combine_files(
+      result = described_class.combine_files(
         source_pdf: source_pdf,
         source_xml: source_xml,
         output_filename: output_filename2,

@@ -1,6 +1,6 @@
 module Secretariat
   module Export
-    module Zugferd
+    module ZugferdPdf
       require "tmpdir"
       require "logger"
       require "open3"
