@@ -26,6 +26,10 @@ RSpec.describe Secretariat::Export::Zugferd, type: :module do
       expect(result).to eq(output_file_path)
       expect(File.exist?(result)).to be(true)
     end
+
+    after do
+      File.delete(output_file_path) if File.exist?(output_file_path)
+    end
   end
 
   describe "combine_files" do
@@ -39,6 +43,10 @@ RSpec.describe Secretariat::Export::Zugferd, type: :module do
 
       expect(result).to eq(output_file_path2)
       expect(File.exist?(result)).to be(true)
+    end
+
+    after do
+      File.delete(output_file_path2) if File.exist?(output_file_path2)
     end
   end
 end
