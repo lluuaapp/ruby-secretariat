@@ -16,3 +16,4 @@
 /*.crt
 .env
 .env/*
+*.gem
