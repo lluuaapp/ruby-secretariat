@@ -13,18 +13,20 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.md"]
 
   # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  s.files = Dir.chdir(File.expand_path(__dir__)) do
-    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  end
-  s.bindir = "exe"
-  s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  s.files = Dir["lib/**/*.rb"]
+
+  s.files += [
+    "secretariat.gemspec"
+  ]
+
+  s.require_paths -= ["lib/secretariat/validator.rb"]
+
+  # enable these if you need verification
+  # s.files += Dir["schemas/**/*"]
+  # s.add_dependency "nokogiri", "~> 1.10"
+  # s.add_dependency "schematron-nokogiri", "~> 0.0", ">= 0.0.3"
 
   s.required_ruby_version = ">= 3.1.0"
-
-  s.add_dependency "nokogiri", "~> 1.10"
-  s.add_dependency "schematron-nokogiri", "~> 0.0", ">= 0.0.3"
 
   s.metadata['rubygems_mfa_required'] = 'true'
 end
